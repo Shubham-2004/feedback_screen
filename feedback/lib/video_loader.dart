@@ -2,7 +2,28 @@
 // import 'package:video_player/video_player.dart';
 // import 'package:chewie/chewie.dart';
 // import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-// import 'package:url_launcher/url_launcher.dart';
+// import 'package:webview_flutter/webview_flutter.dart';
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Video Player',
+//       theme: ThemeData(
+//         primarySwatch: Colors.blue,
+//       ),
+//       home: const Scaffold(
+//         body: SafeArea(child: VideoPlayerWidget()),
+//       ),
+//     );
+//   }
+// }
 
 // class VideoPlayerWidget extends StatefulWidget {
 //   const VideoPlayerWidget({Key? key}) : super(key: key);
@@ -16,6 +37,7 @@
 //   VideoPlayerController? _videoPlayerController;
 //   ChewieController? _chewieController;
 //   YoutubePlayerController? _youtubeController;
+//   WebViewController? _webViewController;
 //   String? _currentUrl;
 
 //   @override
@@ -32,19 +54,19 @@
 //   }
 
 //   void _disposePlayer() {
+//     _youtubeController?.dispose();
 //     _videoPlayerController?.dispose();
 //     _chewieController?.dispose();
-//     _youtubeController?.dispose();
+//     _webViewController = null;
 //   }
 
 //   void _initializePlayer(String url) {
 //     setState(() {
-//       _disposePlayer(); // Dispose of previous controllers
+//       _disposePlayer();
 //       _currentUrl = url;
 //     });
 
 //     if (YoutubePlayer.convertUrlToId(url) != null) {
-//       // Initialize YouTube player
 //       final videoId = YoutubePlayer.convertUrlToId(url)!;
 //       _youtubeController = YoutubePlayerController(
 //         initialVideoId: videoId,
@@ -54,8 +76,7 @@
 //         ),
 //       );
 //     } else if (url.startsWith('http') || url.startsWith('https')) {
-//       // Initialize other video sources
-//       _videoPlayerController = VideoPlayerController.network(url);
+//       _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(url));
 //       _videoPlayerController!.initialize().then((_) {
 //         setState(() {
 //           _chewieController = ChewieController(
@@ -64,8 +85,16 @@
 //             looping: false,
 //           );
 //         });
+//       }).catchError((_) {
+//         _initializeWebView(url);
 //       });
 //     }
+//   }
+
+//   void _initializeWebView(String url) {
+//     _webViewController = WebViewController()
+//       ..setJavaScriptMode(JavaScriptMode.unrestricted)
+//       ..loadRequest(Uri.parse(url));
 //   }
 
 //   @override
@@ -108,27 +137,13 @@
 
 //     if (_youtubeController != null) {
 //       return YoutubePlayer(controller: _youtubeController!);
-//     } else if (_chewieController != null) {
+//     } else if (_chewieController != null &&
+//         _chewieController!.videoPlayerController.value.isInitialized) {
 //       return Chewie(controller: _chewieController!);
-//     } else if (_currentUrl!.startsWith('http') ||
-//         _currentUrl!.startsWith('https')) {
-//       // For unsupported video sources, provide a button to open in an external app
-//       return Center(
-//         child: ElevatedButton(
-//           onPressed: () => _launchURL(_currentUrl!),
-//           child: const Text('Open video in external app'),
-//         ),
-//       );
+//     } else if (_webViewController != null) {
+//       return WebViewWidget(controller: _webViewController!);
 //     } else {
 //       return const Center(child: CircularProgressIndicator());
-//     }
-//   }
-
-//   void _launchURL(String url) async {
-//     if (await canLaunch(url)) {
-//       await launch(url);
-//     } else {
-//       throw 'Could not launch $url';
 //     }
 //   }
 // }
