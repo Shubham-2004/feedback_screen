@@ -12,7 +12,7 @@ class ScreenshotSocialIcons extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              // Add your onTap functionality for Message here
+             
             },
             child: Container(
               height: 60,
@@ -42,7 +42,7 @@ class ScreenshotSocialIcons extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              // Add your onTap functionality for WhatsApp here
+              
             },
             child: Container(
               height: 60,
@@ -72,7 +72,7 @@ class ScreenshotSocialIcons extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              // Add your onTap functionality for Facebook here
+
             },
             child: Container(
               height: 60,
@@ -102,7 +102,7 @@ class ScreenshotSocialIcons extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              // Add your onTap functionality for More here
+    
             },
             child: Container(
               height: 60,
