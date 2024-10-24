@@ -1,3 +1,4 @@
+import 'package:feedback/widget/screenshot_social_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
@@ -22,7 +23,7 @@ class SharePopup extends StatelessWidget {
           Image.asset(
             "assets/rectangle.png",
             height: 4,
-            width: 60,
+            width: 40,
           ),
           SizedBox(height: 23),
           Image.asset(
@@ -43,102 +44,7 @@ class SharePopup extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Material(
-                  color: Colors.transparent,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: InkWell(
-                      splashColor: Colors.grey.withOpacity(0.5),
-                      onTap: () => _launchWp(),
-                      child: Container(
-                        height: 65,
-                        width: 65,
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          "assets/whatsapp.png",
-                          height: 54,
-                          width: 60,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    splashColor: Colors.grey.withOpacity(0.5),
-                    onTap: () => _launchSMS(),
-                    child: Container(
-                      height: 65,
-                      width: 65,
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        "assets/message.png",
-                        height: 54,
-                        width: 60,
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    splashColor: Colors.grey[400]!.withOpacity(0.5),
-                    onTap: () => _launchFacebook(),
-                    child: Container(
-                      height: 65,
-                      width: 65,
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        "assets/facebook.png",
-                        height: 54,
-                        width: 60,
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    splashColor: Colors.grey[400]!.withOpacity(0.5),
-                    onTap: () => _launchx(),
-                    child: Container(
-                      height: 65,
-                      width: 65,
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        "assets/x.png",
-                        height: 54,
-                        width: 60,
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    splashColor: Colors.grey[400]!.withOpacity(0.5),
-                    onTap: () => _shareContent(context),
-                    child: Container(
-                      height: 65,
-                      width: 65,
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        "assets/more.png",
-                        height: 54,
-                        width: 60,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          ScreenshotSocialIcons(),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 25),
             child: Row(
@@ -163,7 +69,7 @@ class SharePopup extends StatelessWidget {
                           'Share Link',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.grey[600],
+                            color: Colors.grey[400],
                           ),
                         ),
                       ],
@@ -209,7 +115,7 @@ class SharePopup extends StatelessWidget {
                           'Copy Link',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.grey[600],
+                            color: Colors.grey[400],
                           ),
                         ),
                       ],
